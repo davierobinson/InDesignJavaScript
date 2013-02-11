@@ -1,8 +1,9 @@
-/* Each InDesign template supports rendering multiple factsheets. 
-Find the frame by keyframe ID and change geometricbounds
-called from template-specific jsx files.
+/* Each InDesign template supports rendering multiple documents. 
+Find a frame by keyframe ID and change geometricbounds.
+Included in template-specific jsx files.
+Works for simple moving - not tested for all possiblities
 
-Dave Robinson 1/03/2012
+Dave Robinson 1/03/2013
 
 Added move and shrink functions - 1/7/2013
 */
