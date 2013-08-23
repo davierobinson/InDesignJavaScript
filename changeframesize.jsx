@@ -6,6 +6,7 @@ Works for simple moving - not tested for all possiblities
 Dave Robinson 1/03/2013
 
 Added move and shrink functions - 1/7/2013
+Update Move functions to clean up at use.
 */
     var moveUpDownAmount = ''; 
     var moveLeftRightAmount = '';
@@ -16,11 +17,13 @@ function changeFrameMoveUp(topy,pageKeyFrameLabel)
 {
   if (isNumber(topy))
   {
+   //alert("got here mu " + topy + " " + pageKeyFrameLabel);
     moveUpDownAmount = -topy; //negative number
 	stretchUpDownAmount = -topy; //negative number
     //alert('Move up amount is: '+moveUpDownAmount+ ' for '+pageKeyFrameLabel);
 	var moveitup = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);      
-      moveUpDownAmount = ''; 
+      moveUpDownAmount = '';
+	  stretchUpDownAmount = '';
   }
   else
   {
@@ -32,12 +35,14 @@ function changeFrameMoveUp(topy,pageKeyFrameLabel)
  {
    if (isNumber(topy))
   {
+	//alert("got here md " + topy);
     moveUpDownAmount = topy; //positive number
 	stretchUpDownAmount = topy //positive number
     try{
-    var moveitdown = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
-      //alert('Move down amount is: '+moveUpDownAmount+ ' for '+pageKeyFrameLabel);
-      moveUpDownAmount = ''; 
+		var moveitdown = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
+		//alert('Move down amount is: '+moveUpDownAmount+ ' for '+pageKeyFrameLabel);
+		moveUpDownAmount = '';
+		stretchUpDownAmount = '';
       }
       catch(error){      
       alert('problem with move down and this label: ' +pageKeyFrameLabel , error);
@@ -53,11 +58,18 @@ function changeFrameMoveUp(topy,pageKeyFrameLabel)
  {
    if (isNumber(leftx))
   {
-     moveLeftRightAmount = -leftx; //negative number
-	 stretchLeftRightAmount =  -leftx; //negative number
-    var moveitleft = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);   
-      //alert('Move left amount is: '+moveLeftRightAmount+ ' for '+pageKeyFrameLabel);
-      moveLeftRightAmount = '';
+	//alert("got here ml " + leftx);
+    moveLeftRightAmount = -leftx; //negative number
+	stretchLeftRightAmount =  -leftx; //negative number
+    try{
+		var moveitleft = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);   
+		//alert('Move left amount is: '+moveLeftRightAmount+ ' for '+pageKeyFrameLabel);
+		moveLeftRightAmount = '';
+		stretchLeftRightAmount = '';
+		}
+      catch(error){      
+      alert('problem with move left and this label: ' +pageKeyFrameLabel , error);
+      }
   }
   else
   {
@@ -69,11 +81,18 @@ function changeFrameMoveRight(leftx,pageKeyFrameLabel)
 {
   if (isNumber(leftx))
   {
-     moveLeftRightAmount = leftx; //positive number
-	 stretchLeftRightAmount =  leftx; //positive number
-    var moveitright = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);  
-     // alert('Move right amount is: '+moveLeftRightAmount+ ' for '+pageKeyFrameLabel);
-      moveLeftRightAmount = '';
+	//alert("got here mr " + leftx + " " + pageKeyFrameLabel);
+    moveLeftRightAmount = leftx; //positive number
+	stretchLeftRightAmount =  leftx; //positive number
+    try{
+		var moveitright = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);  
+		// alert('Move right amount is: '+moveLeftRightAmount+ ' for '+pageKeyFrameLabel);
+		moveLeftRightAmount = '';
+		stretchLeftRightAmount = '';
+		}
+      catch(error){      
+      alert('problem with move right and this label: ' +pageKeyFrameLabel , error);
+      }
   }
   else
   {
@@ -85,10 +104,16 @@ function changeFrameExpandDown(boty,pageKeyFrameLabel)
 {
   if (isNumber(boty))
   {
+	//alert("got here ed " + boty + " " + pageKeyFrameLabel);
     stretchUpDownAmount = boty; //positive number
-    var stretchitdown = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
-      //alert('expand down amount is: '+stretchUpDownAmount+ ' for '+pageKeyFrameLabel);
-      stretchUpDownAmount = '';
+    try {
+		var stretchitdown = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
+		//alert('expand down amount is: '+stretchUpDownAmount+ ' for '+pageKeyFrameLabel);
+		stretchUpDownAmount = '';
+		}
+      catch(error){      
+      alert('problem with expand down and this label: ' +pageKeyFrameLabel , error);
+      }
   }
   else
   {
@@ -100,10 +125,16 @@ function changeFrameShrinkUp(boty,pageKeyFrameLabel)
 {
   if (isNumber(boty))
   {
+	//alert("got here su " + boty + " " + pageKeyFrameLabel);
     stretchUpDownAmount = -boty; //negative number
-    var shrinkitup = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
-     // alert('Shrink up amount is: '+stretchUpDownAmount+ ' for '+pageKeyFrameLabel);
-      stretchUpDownAmount = '';
+    try {
+		var shrinkitup = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
+		// alert('Shrink up amount is: '+stretchUpDownAmount+ ' for '+pageKeyFrameLabel);
+		stretchUpDownAmount = '';
+		}
+      catch(error){      
+      alert('problem with shrink up and this label: ' +pageKeyFrameLabel , error);
+      }
   }
   else
   {
@@ -115,10 +146,16 @@ function changeFrameExpandRight(rightx,pageKeyFrameLabel)
 {
   if (isNumber(rightx))
   {
+	//alert("got here er " + rightx + " " + pageKeyFrameLabel);
     stretchLeftRightAmount = rightx; //positive number
-    var stretchitdown = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
-      //alert('Expand right amount is: '+stretchLeftRightAmount+ ' for '+pageKeyFrameLabel);
-      stretchLeftRightAmount = '';
+    try {
+		var stretchitdown = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
+		//alert('Expand right amount is: '+stretchLeftRightAmount+ ' for '+pageKeyFrameLabel);
+		stretchLeftRightAmount = '';
+		}
+      catch(error){      
+      alert('problem with expand ritht and this label: ' +pageKeyFrameLabel , error);
+      }
   }
   else
   {
@@ -130,10 +167,16 @@ function changeFrameShrinkLeft(rightx,pageKeyFrameLabel)
 {
   if (isNumber(rightx))
   {
+	//alert("got here sl " + rightx + " " + pageKeyFrameLabel);
     stretchLeftRightAmount = -rightx; //negative number
-    var shrinkitup = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
-      //alert('Shrink left amount is: '+stretchLeftRightAmount+ ' for '+pageKeyFrameLabel);
-      stretchLeftRightAmount = '';
+    try {
+		var shrinkitup = changeFrameSize(moveUpDownAmount,moveLeftRightAmount,stretchUpDownAmount,stretchLeftRightAmount,pageKeyFrameLabel);
+		//alert('Shrink left amount is: '+stretchLeftRightAmount+ ' for '+pageKeyFrameLabel);
+		stretchLeftRightAmount = '';
+		}
+      catch(error){      
+      alert('problem with shrink left and this label: ' +pageKeyFrameLabel , error);
+      }
   }
   else
   {
@@ -144,7 +187,7 @@ function changeFrameShrinkLeft(rightx,pageKeyFrameLabel)
 
 function changeFrameSize(topy,leftx,boty,rightx,pageKeyFrameLabel)
 {
-//alert("cfs: " + topy +" "+ leftx  +" "+ boty +" "+rightx+" "+ pageKeyFrameLabel); 
+//alert("cfs: t: " + topy +" l: "+ leftx  +" b: "+ boty +" r: "+rightx+" "+ pageKeyFrameLabel); 
 //change the coords
            //find the text frame key
          var thisDocument = app.activeDocument;
@@ -169,7 +212,7 @@ function changeFrameSize(topy,leftx,boty,rightx,pageKeyFrameLabel)
                   //alert('got here top y new: '+newbounds[0]);
 				  //Since we changed the topy the newbounds is now the oldbound for next function
 				  oldbounds[0] = newbounds[0];
-                  
+                  //alert("new bounds first: " + newbounds);
                 }
                 
               if (leftx !== null && leftx !== "")
@@ -179,7 +222,8 @@ function changeFrameSize(topy,leftx,boty,rightx,pageKeyFrameLabel)
                   newbounds[2] = oldbounds[2];
                   newbounds[3] = oldbounds[3];
 				//Since we changed the leftx the newbounds is now the oldbound for next function
-				  oldbounds[1] = newbounds[1];                  
+				  oldbounds[1] = newbounds[1];
+				  //alert("new bounds second: " + newbounds);
                 }
                 
               if (boty !== null && boty !== "")
@@ -192,12 +236,13 @@ function changeFrameSize(topy,leftx,boty,rightx,pageKeyFrameLabel)
 				  
                    var frameHeight = newbounds[2] - newbounds[0];
                    //alert('got here boty: top: '+newbounds[0]+' bot: '+ newbounds[2] + ' height: '+frameHeight);
-                   if (frameHeight < .05){ 
-					   alert('Too much up/down shrinking for frame: ' + pageKeyFrameLabel + '. No shrinking done!');
-					   newbounds[2] = oldbounds[2];
-                   } 
+                   // if (frameHeight < .05){ 
+					   // alert('Too much up/down shrinking for frame: ' + pageKeyFrameLabel + '. No shrinking done!');
+					   // newbounds[2] = oldbounds[2];
+                   // } 
 				  //Since we changed the boty the newbounds is now the oldbound for next function
-				  oldbounds[2] = newbounds[2];				   
+				  oldbounds[2] = newbounds[2];
+				  //alert("new bounds third: " + newbounds);
                 }
                 
               if (rightx !== null  && rightx !== "")
@@ -209,21 +254,21 @@ function changeFrameSize(topy,leftx,boty,rightx,pageKeyFrameLabel)
 				  
                    var frameWidth = newbounds[3] - newbounds[1];
                  //alert('got here rightx: right: '+newbounds[3]+' left: '+ newbounds[1] + ' width: '+frameWidth);
-                   if (frameWidth < .25){
-					   alert('Too much left/right shrinking for frame: ' + pageKeyFrameLabel + '. No shrinking done!');
-					   newbounds[3] = oldbounds[3];
-                   }
+                   // if (frameWidth < .05){
+					   // alert('Too much left/right shrinking for frame: ' + pageKeyFrameLabel + '. No shrinking done!');
+					   // newbounds[3] = oldbounds[3];
+                   // }
 				   //Since we changed the rightx the newbounds is now the oldbound for next function
 				  oldbounds[3] = newbounds[3];
-                }
-              
+				  //alert("new bounds fourth: " + newbounds);
+                }              
               
               //if we want to add, say 0.125 outer dimension instead of providing new coords. something like this
-              //newbounds = [oldbounds[0] - 0.125, oldbounds[1] - 0.125, oldbounds[2] + 0.125, oldbounds[3] + 0.125 ];
-              
+              //newbounds = [oldbounds[0] - 0.125, oldbounds[1] - 0.125, oldbounds[2] + 0.125, oldbounds[3] + 0.125 ];              
               //alert('old frame size: '  +oldbounds + ' new frame size: '+newbounds );
-              //var newbounds = oldbounds;              
+              //page the change on the frame
               pageItem.geometricBounds = newbounds;
+			  //alert("new bounds final: " + newbounds);
               //alert('new frame size: '  + pageItem.geometricBounds + ' in frame labeled: '+ pageItem.label);
               //pageItem.paragraphs.everyItem().pointSize = "17pt";//.maximumLetterSpacing = 45;
               
